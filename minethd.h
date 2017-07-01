@@ -2,7 +2,7 @@
 #include <thread>
 #include <atomic>
 
-#include "amd_gpu/gpu.h"
+#include "intel_gpu/gpu.h"
 
 class telemetry
 {

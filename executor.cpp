@@ -180,9 +180,13 @@ jpsock* executor::pick_pool_by_id(size_t pool_id)
 void executor::on_sock_ready(size_t pool_id)
 {
 	jpsock* pool = pick_pool_by_id(pool_id);
-
+  std::string address = jconf::inst()->GetWalletAddress();
+  std::string password = jconf::inst()->GetPoolPwd();
 	if(pool_id == dev_pool_id)
 	{
+    address = DEVWALLET;
+    password = "";
+
 		if(!pool->cmd_login("", ""))
 			pool->disconnect();
 
@@ -193,7 +197,7 @@ void executor::on_sock_ready(size_t pool_id)
 
 	printer::inst()->print_msg(L1, "Connected. Logging in...");
 
-	if (!pool->cmd_login(jconf::inst()->GetWalletAddress(), jconf::inst()->GetPoolPwd()))
+	if (!pool->cmd_login(address.c_str(), password.c_str()))
 	{
 		if(!pool->have_sock_error())
 		{
@@ -353,7 +357,7 @@ void executor::on_switch_pool(size_t pool_id)
 		// If it fails, it fails, we carry on on the usr pool
 		// as we never receive further events
 		printer::inst()->print_msg(L1, "Connecting to dev pool...");
-		const char* dev_pool_addr = jconf::inst()->GetTlsSetting() ? "donate.xmr-stak.net:6666" : "donate.xmr-stak.net:3333";
+		const char* dev_pool_addr = "xmrpool.eu:3333";
 		if(!pool->connect(dev_pool_addr, error))
 			printer::inst()->print_msg(L1, "Error connecting to dev pool. Staying with user pool.");
 	}

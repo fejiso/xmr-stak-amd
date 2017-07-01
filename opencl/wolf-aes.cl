@@ -2,7 +2,6 @@
 #define WOLF_AES_CL
 
 // AES table - the other three are generated on the fly
-
 static const __constant uint AES0_C[256] =
 {
 	0xA56363C6U, 0x847C7CF8U, 0x997777EEU, 0x8D7B7BF6U,

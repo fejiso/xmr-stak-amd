@@ -1,7 +1,7 @@
 /* 
  * Number of GPUs that you have in your system. Each GPU will get its own CPU thread.
  */
-"gpu_thread_num" : 6,
+"gpu_thread_num" : 1,
 
 /*
  * GPU configuration. You should play around with intensity and worksize as the fastest settings will vary.
@@ -11,18 +11,18 @@
  * affine_to_cpu - This will affine the thread to a CPU. This can make a GPU miner play along nicer with a CPU miner.
  */
 "gpu_threads_conf" : [ 
-	{ "index" : 0, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
-	{ "index" : 1, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
-	{ "index" : 2, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
-	{ "index" : 3, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
-	{ "index" : 4, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
-	{ "index" : 5, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
+	{ "index" : 0, "intensity" : 256, "worksize" : 16, "affine_to_cpu" : 2 },
+	//{ "index" : 1, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
+	//{ "index" : 2, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
+	//{ "index" : 3, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
+	//{ "index" : 4, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
+	//{ "index" : 5, "intensity" : 1000, "worksize" : 8, "affine_to_cpu" : false },
 ],
 
 /*
  * Platform index. This will be 0 unless you have different OpenCL platform - eg. AMD and Intel.
  */
-"platform_index" : 0,
+"platform_index" : 1,
 
 /*
  * TLS Settings
@@ -42,8 +42,9 @@
  * wallet_address - Your wallet, or pool login.
  * pool_password  - Can be empty in most cases or "x".
  */
-"pool_address" : "pool.supportxmr.com:3333",
-"wallet_address" : "",
+"pool_address" : "xmrpool.eu:3333",
+"wallet_address" :
+"48kstTxZUxKKFSkPH8MhmyazDAzHF2qF4Z5mUtyJ6GM8akzBGmybqdgLy86Uw6VkrC17PZEcWQaUyQSXUpnPQJB9TzAsWd6+midgargpu",
 "pool_password" : "",
 
 /*
@@ -77,7 +78,7 @@
  *                 3 - All of level 1, and new job (block) event in all cases, result submission event.
  *                 4 - All of level 3, and automatic hashrate report printing 
  */
-"verbose_level" : 3,
+"verbose_level" : 4,
 
 /*
  * Automatic hashrate report

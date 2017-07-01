@@ -3,6 +3,7 @@
 
 // Vectorized Skein implementation macros and functions by Wolf
 
+
 #define SKEIN_KS_PARITY	0x1BD11BDAA9FC1A22
 
 static const __constant ulong SKEIN256_IV[8] =

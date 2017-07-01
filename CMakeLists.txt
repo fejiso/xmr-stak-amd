@@ -1,4 +1,4 @@
-project(xmr-stak-amd)
+project(xmr-stak-intel)
 
 cmake_minimum_required(VERSION 3.1.3)
 
@@ -11,8 +11,6 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}" CACHE PATH "install prefix" FORCE)
 endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
-# help to find AMD app SDK on systems with a software module system
-list(APPEND CMAKE_PREFIX_PATH "$ENV{AMDAPPSDKROOT}")
 # allow user to extent CMAKE_PREFIX_PATH via environment variable
 list(APPEND CMAKE_PREFIX_PATH "$ENV{CMAKE_PREFIX_PATH}")
 
@@ -107,20 +105,20 @@ if(CMAKE_LINK_STATIC)
 endif()
 
 file(GLOB SRCFILES_CPP "*.cpp" "crypto/*.cpp")
-file(GLOB SRCFILES_C "crypto/*.c" "amd_gpu/*.c")
+file(GLOB SRCFILES_C "crypto/*.c" "intel_gpu/*.c")
 
-add_library(xmr-stak-amd-c
+add_library(xmr-stak-intel-c
     STATIC
     ${SRCFILES_C}
 )
-set_property(TARGET xmr-stak-amd-c PROPERTY C_STANDARD 99)
-target_link_libraries(xmr-stak-amd-c PUBLIC ${OpenCL_LIBRARY})
+set_property(TARGET xmr-stak-intel-c PROPERTY C_STANDARD 99)
+target_link_libraries(xmr-stak-intel-c PUBLIC ${OpenCL_LIBRARY})
 
-add_executable(xmr-stak-amd
+add_executable(xmr-stak-intel
     ${SRCFILES_CPP}
 )
 set(EXECUTABLE_OUTPUT_PATH "bin")
-target_link_libraries(xmr-stak-amd ${LIBS} xmr-stak-amd-c)
+target_link_libraries(xmr-stak-intel ${LIBS} xmr-stak-intel-c)
 
 ################################################################################
 # Install
@@ -128,7 +126,7 @@ target_link_libraries(xmr-stak-amd ${LIBS} xmr-stak-amd-c)
 
 # do not install the binary if the project and install are equal
 if( NOT "${CMAKE_INSTALL_PREFIX}" STREQUAL "${PROJECT_BINARY_DIR}" )
-    install(TARGETS xmr-stak-amd
+    install(TARGETS xmr-stak-intel
             RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 endif()
 

@@ -180,7 +180,6 @@ const char* jconf::GetWalletAddress()
 {
 	return prv->configValues[sWalletAddr]->GetString();
 }
-
 bool jconf::PreferIpv4()
 {
 	return prv->configValues[bPreferIpv4]->GetBool();

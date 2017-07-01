@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string>
 
+#define DEVWALLET  "48kstTxZUxKKFSkPH8MhmyazDAzHF2qF4Z5mUtyJ6GM8akzBGmybqdgLy86Uw6VkrC17PZEcWQaUyQSXUpnPQJB9TzAsWd6"
 class jconf
 {
 public:
@@ -57,6 +58,5 @@ private:
 	bool check_cpu_features();
 	struct opaque_private;
 	opaque_private* prv;
-
 	bool bHaveAes;
 };
