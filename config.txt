@@ -22,7 +22,7 @@
 /*
  * Platform index. This will be 0 unless you have different OpenCL platform - eg. AMD and Intel.
  */
-"platform_index" : 1,
+"platform_index" : 0,
 
 /*
  * TLS Settings
