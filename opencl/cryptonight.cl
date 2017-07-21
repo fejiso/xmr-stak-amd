@@ -39,17 +39,6 @@ inline int amd_bfe(const uint src0, const uint offset, const uint width)
 	return src0 >> offset;
 }
 
-int amd_bfe(uint2 src0, uint2 src1, uint2 src2) 
-{
-	int offset = src1.s0 & 31; 
-	int width = src2.s0 & 31; 
-	if ( width == 0 ) 
-		return 0;
-	if ( (offset + width) < 32 ) 
-		return (src0.s0 << (32 - offset - width)) >> (32 - width);
-
-	return src0.s0 >> offset;
-}
 
 #define BYTE(x, y)	(amd_bfe((x), (y) << 3U, 8U))
 
