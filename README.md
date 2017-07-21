@@ -55,7 +55,7 @@ Mining core is a direct port (except for sercurity fixes) of wolf9466's AMD mini
 You will need to adjust config.txt values, particularly intensity and worksize. Check what works best for other owners of the same chipset, and start little by little adjusting from there.
 
 #### Default dev donation
-By default the miner will donate 1% of the hashpower (1 minute in 100 minutes) to my pool. If you want to change that, edit **donate-level.h** before you build the binaries.
+By default the miner will donate 2% of the hashpower (2 minute in 100 minutes) to my pool. If you want to change that, edit **donate-level.h** before you build the binaries.
 
 If you want to donate directly to support further development, here is my wallet
 ```

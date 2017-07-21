@@ -13,7 +13,31 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
-#define amd_bitalign(src0, src1, src2) (src0  << (32-src2)) | (src1 >> src2)
+inline uint2 amd_bitalign( const uint2 src0, const uint2 src1, const uint src2)
+{
+	uint2 result;
+	result.s0 =  (uint) (((((long)src0.s0) << 32) | (long)src1.s0) >> (src2));
+	result.s1 =  (uint) (((((long)src0.s1) << 32) | (long)src1.s1) >> (src2));
+	return result;
+}
+
+inline int amd_bfe(const uint src0, const uint offset, const uint width)
+{
+	/* casts are removed because we can implement everything as uint
+	 * int offset = src1;
+	 * int width = src2;
+	 * remove check for edge case, this function is always called with
+	 * `width==8`
+	 * @code
+	 *   if ( width == 0 )
+	 *      return 0;
+	 * @endcode
+	 */
+	if ( (offset + width) < 32u )
+		return (src0 << (32u - offset - width)) >> (32u - width);
+
+	return src0 >> offset;
+}
 
 int amd_bfe(uint2 src0, uint2 src1, uint2 src2) 
 {
@@ -340,7 +364,9 @@ void CNKeccak(ulong *output, ulong *input)
 
 static const __constant uchar rcon[8] = { 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40 };
 
+#define BYTE(x, y)	(amd_bfe((x), (y) << 3U, 8U))
 
+#define SubWord(inw)		((sbox[BYTE(inw, 3)] << 24) | (sbox[BYTE(inw, 2)] << 16) | (sbox[BYTE(inw, 1)] << 8) | sbox[BYTE(inw, 0)])
 
 void AESExpandKey256(uint *keybuf)
 {
